@@ -1,1 +1,15 @@
 config.js
+
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+
+psd
+thumb
+sketch
