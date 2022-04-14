@@ -16,6 +16,8 @@ const passport = require("passport");
 index.use(passport.initialize());
 index.use("/user", userRouter);
 
-index.listen(5000, () => {
+index.listen(80, () => {
 	console.log("express server started");
 });
+
+index.use(express.static("client/build"));
