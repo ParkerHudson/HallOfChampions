@@ -12,9 +12,11 @@ mongoose.connect(config.dbAddress, { useNewUrlParser: true }, () => {
 });
 
 const userRouter = require("./routes/User.js");
+const apiRouter = require("./routes/api");
 const passport = require("passport");
 index.use(passport.initialize());
 index.use("/user", userRouter);
+index.use("/api", apiRouter);
 
 index.listen(80, () => {
 	console.log("express server started");

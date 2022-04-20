@@ -1,5 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import TeamService from "../Services/TeamService";
+const Admin = () => {
+	const [TeamName, setTeamName] = useState("");
 
-const Admin = () => <h1>Admin Page to Insert New Data</h1>;
+	const onChange = (e) => {
+		setTeamName({ teamName: e.target.value });
+	};
+
+	const onSubmit = (e) => {
+		e.preventDefault();
+		console.log(TeamName);
+		TeamService.postTeam(TeamName);
+	};
+
+	return (
+		<>
+			<h1>Welcome Commish Mafia member</h1>
+			<label>Insert Team Name</label>
+			<input type="text" onChange={onChange} />
+			<button className="btn btn-lg btn-primary btn-block" onClick={onSubmit}>
+				Add Team to Database
+			</button>
+		</>
+	);
+};
 
 export default Admin;

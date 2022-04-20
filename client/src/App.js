@@ -5,6 +5,7 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Todos from "./Components/Todos";
 import Admin from "./Components/Admin";
+import Players from "./Components/Players";
 import PrivateRoute from "./hocs/PrivateRoute";
 import UnPrivateRoute from "./hocs/UnPrivateRoute";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -47,6 +48,7 @@ function App() {
 						</PrivateRoute>
 					}
 				/>
+				<Route path="/players" element={<Players />} />
 			</Routes>
 		</Router>
 	);

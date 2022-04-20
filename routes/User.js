@@ -5,6 +5,7 @@ const passportConfig = require("../passport");
 const JWT = require("jsonwebtoken");
 const User = require("../models/User");
 const Todo = require("../models/Todo");
+const Team = require("../models/Team");
 
 const signToken = (userID) => {
 	return JWT.sign(
@@ -25,29 +26,23 @@ userRouter.post("/register", (req, res) => {
 				.status(500)
 				.json({ message: { msgBody: "Error has occured", msgError: true } });
 		if (user)
-			res
-				.status(400)
-				.json({
-					message: { msgBody: "Username is already taken", msgError: true },
-				});
+			res.status(400).json({
+				message: { msgBody: "Username is already taken", msgError: true },
+			});
 		else {
 			const newUser = new User({ username, password, role });
 			newUser.save((err) => {
 				if (err)
-					res
-						.status(500)
-						.json({
-							message: { msgBody: "Error has occured", msgError: true },
-						});
+					res.status(500).json({
+						message: { msgBody: "Error has occured", msgError: true },
+					});
 				else
-					res
-						.status(201)
-						.json({
-							message: {
-								msgBody: "Account successfully created",
-								msgError: false,
-							},
-						});
+					res.status(201).json({
+						message: {
+							msgBody: "Account successfully created",
+							msgError: false,
+						},
+					});
 			});
 		}
 	});
@@ -89,20 +84,16 @@ userRouter.post(
 				req.user.todos.push(todo);
 				req.user.save((err) => {
 					if (err)
-						res
-							.status(500)
-							.json({
-								message: { msgBody: "Error has occured", msgError: true },
-							});
+						res.status(500).json({
+							message: { msgBody: "Error has occured", msgError: true },
+						});
 					else
-						res
-							.status(200)
-							.json({
-								message: {
-									msgBody: "Successfully created todo",
-									msgError: false,
-								},
-							});
+						res.status(200).json({
+							message: {
+								msgBody: "Successfully created todo",
+								msgError: false,
+							},
+						});
 				});
 			}
 		});
@@ -117,11 +108,9 @@ userRouter.get(
 			.populate("todos")
 			.exec((err, document) => {
 				if (err)
-					res
-						.status(500)
-						.json({
-							message: { msgBody: "Error has occured", msgError: true },
-						});
+					res.status(500).json({
+						message: { msgBody: "Error has occured", msgError: true },
+					});
 				else {
 					res.status(200).json({ todos: document.todos, authenticated: true });
 				}
@@ -138,11 +127,29 @@ userRouter.get(
 				.status(200)
 				.json({ message: { msgBody: "You are an admin", msgError: false } });
 		} else
-			res
-				.status(403)
-				.json({
-					message: { msgBody: "You're not an admin,go away", msgError: true },
+			res.status(403).json({
+				message: { msgBody: "You're not an admin,go away", msgError: true },
+			});
+	}
+);
+
+userRouter.post(
+	"/admin",
+	passport.authenticate("jwt", { session: false }),
+	(req, res) => {
+		const team = new Team(req.body);
+		team
+			.save(team)
+			.then((data) => {
+				res.send(data);
+			})
+			.catch((err) => {
+				res.status(500).json({
+					message: {
+						msgBody: "An error occured while creating a creat operation",
+					},
 				});
+			});
 	}
 );
 
