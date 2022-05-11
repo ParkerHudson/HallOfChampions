@@ -18,7 +18,7 @@ index.use(passport.initialize());
 index.use("/user", userRouter);
 index.use("/api", apiRouter);
 
-index.listen(80, () => {
+index.listen(config.listeningPort, () => {
 	console.log("express server started");
 });
 

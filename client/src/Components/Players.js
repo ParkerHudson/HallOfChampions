@@ -6,10 +6,15 @@ const Players = (props) => {
 	const [username, setUsername] = useState({ username: "" });
 	const [players, setPlayers] = useState([]);
 	const [toDelete, setToDelete] = useState({ username: "" });
+	const [team, setTeam] = useState({ teamName: "" });
 	const [updatePage, setUpdate] = useState(false);
 
 	const onChange = (e) => {
-		setUsername({ username: e.target.value });
+		setUsername({ [e.target.id]: e.target.value });
+	};
+
+	const onChangeTeam = (e) => {
+		setTeam({ teamName: e.target.value });
 	};
 
 	const storeToDelete = (e) => {
@@ -19,20 +24,20 @@ const Players = (props) => {
 	const onSubmit = (e) => {
 		e.preventDefault();
 		console.log(username);
-		PlayerService.postPlayer(username);
+		PlayerService.postPlayer(username, team);
 		PlayerService.getPlayers().then((data) => {
 			setPlayers(data.players);
 		});
-		console.log(players);
+		resetForm();
 	};
 
 	const onDelete = (e) => {
 		e.preventDefault();
-		console.log(toDelete);
-		PlayerService.deletePlayer(toDelete);
+		PlayerService.deletePlayer(username);
 		PlayerService.getPlayers().then((data) => {
 			setPlayers(data.players);
 		});
+		resetForm();
 	};
 
 	useEffect(() => {
@@ -54,13 +59,24 @@ const Players = (props) => {
 					return <Player key={username._id} username={username} />;
 				})}
 			</ul>
-			<label>Add Player</label>
-			<input type="text" onChange={onChange} />
+			<label>PSN Name</label>
+			<input
+				type="text"
+				id="username"
+				placeholder="Enter Username"
+				value={username.username}
+				onChange={onChange}
+			/>
+			<input
+				type="text"
+				id="team"
+				placeholder="Enter Team"
+				value={team.teamName}
+				onChange={onChange}
+			/>
 			<button className="btn btn-lg btn-primary btn-block" onClick={onSubmit}>
 				Add
 			</button>
-			<label>Remove Player</label>
-			<input type="text" onChange={storeToDelete} />
 			<button className="btn btn-lg btn-primary btn-block" onClick={onDelete}>
 				Delete
 			</button>

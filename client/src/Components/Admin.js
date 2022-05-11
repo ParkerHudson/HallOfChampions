@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TeamService from "../Services/TeamService";
+import Players from "./Players";
 const Admin = () => {
 	const [TeamName, setTeamName] = useState("");
 
@@ -21,6 +22,7 @@ const Admin = () => {
 			<button className="btn btn-lg btn-primary btn-block" onClick={onSubmit}>
 				Add Team to Database
 			</button>
+			<Players />
 		</>
 	);
 };
