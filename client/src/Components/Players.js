@@ -11,7 +11,7 @@ const Players = (props) => {
 	const [updatePage, setUpdate] = useState(false);
 
 	const onChange = (e) => {
-		setUsername({ [e.target.id]: e.target.value });
+		setUsername({ username: e.target.value });
 	};
 
 	const onChangeTeam = (e) => {
@@ -24,11 +24,12 @@ const Players = (props) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		console.log(username);
-		PlayerService.postPlayer(username, team);
-		PlayerService.getPlayers().then((data) => {
-			setPlayers(data.players);
+		PlayerService.postPlayer(username, team).then(() => {
+			PlayerService.getPlayers().then((data) => {
+				setPlayers(data.players);
+			});
 		});
+
 		resetForm();
 	};
 
@@ -50,6 +51,7 @@ const Players = (props) => {
 
 	const resetForm = () => {
 		setUsername({ username: "" });
+		setTeam({ teamName: "" });
 	};
 
 	return (
@@ -70,10 +72,10 @@ const Players = (props) => {
 			/>
 			<input
 				type="text"
-				id="team"
+				id="teamName"
 				placeholder="Enter Team"
 				value={team.teamName}
-				onChange={onChange}
+				onChange={onChangeTeam}
 			/>
 			<button className="btn btn-lg btn-primary btn-block" onClick={onSubmit}>
 				Add

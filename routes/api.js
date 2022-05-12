@@ -32,7 +32,8 @@ apiRouter.post(
 	"/addPlayer",
 	passport.authenticate("jwt", { session: false }),
 	(req, res) => {
-		Team.findOne({ teamName: req.body.team }, (err, teamObject) => {
+		console.log(req.body);
+		Team.findOne({ teamName: req.body.team.teamName }, (err, teamObject) => {
 			if (err)
 				res.status(500).json({
 					message: {
@@ -45,7 +46,7 @@ apiRouter.post(
 					let tempTeam = {};
 					const newPlayerTeam = Object.assign(tempTeam, teamObject);
 					const player = new Player({
-						username: req.body.username,
+						username: req.body.player.username,
 						team: newPlayerTeam,
 					});
 					player
@@ -62,7 +63,7 @@ apiRouter.post(
 						});
 				} else {
 					const player = new Player({
-						username: req.body.username,
+						username: req.body.player.username,
 					});
 					player
 						.save(player)
