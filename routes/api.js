@@ -139,12 +139,35 @@ apiRouter.post(
 	}
 );
 
-//Add Team
+//Get Team
+apiRouter.get(
+	"/getTeams",
+	passport.authenticate("jwt", { session: false }),
+	(req, res) => {
+		Team.find().exec((err, document) => {
+			if (err)
+				res.status(500).json({
+					message: { msgBody: "Error has occured", msgError: true },
+				});
+			else {
+				res.status(200).json({ Teams: document, authenticated: true });
+			}
+		});
+	}
+);
 
 //Remove Team
 
 //Update Team
 
 //Update Player
+
+//Add Game
+
+//Remove Game
+
+//Update Game
+
+//Get Game
 
 module.exports = apiRouter;
