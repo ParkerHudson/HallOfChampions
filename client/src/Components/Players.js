@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PlayerService from "../Services/PlayerService";
 import Player from "./Player";
+import Team from "./Team";
 
 const Players = (props) => {
 	const [username, setUsername] = useState({ username: "" });

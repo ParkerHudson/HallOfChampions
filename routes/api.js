@@ -32,19 +32,53 @@ apiRouter.post(
 	"/addPlayer",
 	passport.authenticate("jwt", { session: false }),
 	(req, res) => {
-		const player = new Player({ username: req.body.username });
-		player
-			.save(player)
-			.then((data) => {
-				res.send(data);
-			})
-			.catch((err) => {
+		Team.findOne({ teamName: req.body.team }, (err, teamObject) => {
+			if (err)
 				res.status(500).json({
 					message: {
-						msgBody: `An error has occured: ${err}`,
+						msgBody: "Error has occured when finding team",
+						msgError: true,
 					},
 				});
-			});
+			else {
+				if (teamObject != null) {
+					let tempTeam = {};
+					const newPlayerTeam = Object.assign(tempTeam, teamObject);
+					const player = new Player({
+						username: req.body.username,
+						team: newPlayerTeam,
+					});
+					player
+						.save(player)
+						.then((data) => {
+							res.send(data);
+						})
+						.catch((err) => {
+							res.status(500).json({
+								message: {
+									msgBody: `An error has occured: ${err}`,
+								},
+							});
+						});
+				} else {
+					const player = new Player({
+						username: req.body.username,
+					});
+					player
+						.save(player)
+						.then((data) => {
+							res.send(data);
+						})
+						.catch((err) => {
+							res.status(500).json({
+								message: {
+									msgBody: `An error has occured: ${err}`,
+								},
+							});
+						});
+				}
+			}
+		});
 	}
 );
 
