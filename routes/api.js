@@ -270,4 +270,20 @@ apiRouter.post(
 
 //Get Game
 
+apiRouter.get(
+	"/getGames",
+	passport.authenticate("jwt", { session: false }),
+	(req, res) => {
+		Game.find().exec((err, document) => {
+			if (err)
+				res.status(500).json({
+					message: { msgBody: "Error has occured", msgError: true },
+				});
+			else {
+				res.status(200).json({ Games: document, authenticated: true });
+			}
+		});
+	}
+);
+
 module.exports = apiRouter;
