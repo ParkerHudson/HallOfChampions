@@ -9,6 +9,7 @@ const GameSchema = new mongoose.Schema(
 		},
 		gameType: {
 			type: String,
+			enum: ["bye", "wildcard", "divisional", "championship", "superbowl"],
 			required: true,
 		},
 		winner: {
@@ -17,7 +18,6 @@ const GameSchema = new mongoose.Schema(
 		},
 		loser: {
 			type: Contender,
-			required: true,
 		},
 		winnerPoints: {
 			type: Number,
