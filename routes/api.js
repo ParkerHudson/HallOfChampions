@@ -7,6 +7,8 @@ const User = require("../models/User");
 const Todo = require("../models/Todo");
 const Team = require("../models/Team");
 const Player = require("../models/Player");
+const Game = require("../models/Game");
+const Contender = require("../models/Contender");
 
 apiRouter.post(
 	"/addTeam",
@@ -198,6 +200,70 @@ apiRouter.get(
 
 //Add Game
 
+apiRouter.post(
+	"/addGame",
+	passport.authenticate("jwt", { session: false }),
+	(req, res) => {
+		var temp = {};
+		Player.findOne({ username: req.body.winner }, (err, playerObject) => {
+			if (err)
+				res.status(500).json({
+					message: {
+						msgBody: "Error has occured when finding player",
+						msgError: true,
+					},
+				});
+			else {
+				temp = Object.assign(temp, playerObject);
+				var givenWinner = new Contender({
+					player: temp,
+					seed: req.body.winnerSeed,
+				});
+
+				Player.findOne({ username: req.body.loser }, (err, playerObject) => {
+					if (err)
+						res.status(500).json({
+							message: {
+								msgBody: "Error has occured when finding player",
+								msgError: true,
+							},
+						});
+					else {
+						temp = Object.assign(temp, playerObject);
+						var givenLoser = new Contender({
+							player: temp,
+							seed: req.body.loserSeed,
+						});
+
+						const game = new Game({
+							gameYear: req.body.gameYear,
+							gameType: req.body.gameType,
+							winner: givenWinner,
+							loser: givenLoser,
+							winnerPoints: req.body.winnerPoints,
+							loserPoints: req.body.loserPoints,
+						});
+						game
+							.save(game)
+							.then((data) => {
+								res.send(data);
+							})
+							.catch((err) => {
+								res.status(500).json({
+									message: {
+										msgBody: `An error occured while adding game to database. Error: ${err}`,
+									},
+								});
+							});
+						console.log("Temp: " + temp);
+						console.log("Winner: " + givenWinner);
+						console.log("Loser: " + givenLoser);
+					}
+				});
+			}
+		});
+	}
+);
 //Remove Game
 
 //Update Game
