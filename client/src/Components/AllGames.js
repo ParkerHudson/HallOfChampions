@@ -5,7 +5,6 @@ import Game from "./Game";
 //Display history of all games in database
 
 const AllGames = (props) => {
-	const [gameYear, setGameYear] = useState({ gameYear: 0 });
 	const [games, setGames] = useState([]);
 
 	useEffect(() => {

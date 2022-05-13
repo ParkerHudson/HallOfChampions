@@ -26,7 +26,7 @@ const Todos = (props) => {
 					setTodos(getData.todos);
 					setMessage(message);
 				});
-			} else if (message.msgBody == "Unauthorized") {
+			} else if (message.msgBody === "Unauthorized") {
 				setMessage(message);
 				authContext.setUser({ username: "", role: "" });
 				authContext.setIsAuthenticated(false);

@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PlayerService from "../Services/PlayerService";
 import Player from "./Player";
-import Team from "./Team";
 
 const Players = (props) => {
 	const [username, setUsername] = useState({ username: "" });
 	const [players, setPlayers] = useState([]);
-	const [toDelete, setToDelete] = useState({ username: "" });
+
 	const [team, setTeam] = useState({ teamName: "" });
-	const [updatePage, setUpdate] = useState(false);
 
 	const onChange = (e) => {
 		setUsername({ username: e.target.value });
@@ -16,10 +14,6 @@ const Players = (props) => {
 
 	const onChangeTeam = (e) => {
 		setTeam({ teamName: e.target.value });
-	};
-
-	const storeToDelete = (e) => {
-		setToDelete({ username: e.target.value });
 	};
 
 	const onSubmit = (e) => {
