@@ -1,5 +1,17 @@
 const mongoose = require("mongoose");
 
+const contender = {
+	player: {
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Player",
+		required: true,
+	},
+	seed: {
+		type: int,
+		required: true,
+	},
+};
+
 const GameSchema = new mongoose.Schema(
 	{
 		gameYear: {
@@ -11,13 +23,16 @@ const GameSchema = new mongoose.Schema(
 			required: true,
 		},
 		winner: {
-			id: { type: mongoose.Schema.Types.ObjectId, ref: "TeamSchema" },
+			contender,
+			required: true,
 		},
 		loser: {
-			id: { type: mongoose.Schema.Types.ObjectId, ref: "TeamSchema" },
+			contender,
+			required: true,
 		},
 		score: {
 			type: int,
+			required: true,
 		},
 	},
 	{

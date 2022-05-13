@@ -32,7 +32,6 @@ apiRouter.post(
 	"/addPlayer",
 	passport.authenticate("jwt", { session: false }),
 	(req, res) => {
-		console.log(req.body);
 		Team.findOne({ teamName: req.body.team.teamName }, (err, teamObject) => {
 			if (err)
 				res.status(500).json({
