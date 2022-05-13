@@ -1,11 +1,7 @@
 export default {
 	getGames: () => {
-		return fetch("/api/getGames").then(() => {
-			if (response.status != 401) {
-				return response.json().then((data) => data);
-			} else {
-				return { message: { msgBody: "UnAuthorized" }, msgError: true };
-			}
+		return fetch("/api/getGames").then((response) => {
+			return response.json().then((data) => data);
 		});
 	},
 
@@ -16,7 +12,7 @@ export default {
 			headers: {
 				"Content-Type": "application/json",
 			},
-		}).then(() => {
+		}).then((response) => {
 			if (response.status != 401) {
 				return response.json().then((data) => data);
 			} else {

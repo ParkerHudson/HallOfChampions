@@ -44,7 +44,6 @@ const Players = (props) => {
 
 	useEffect(() => {
 		PlayerService.getPlayers().then((data) => {
-			console.log(data.players);
 			setPlayers(data.players);
 		});
 	}, []);

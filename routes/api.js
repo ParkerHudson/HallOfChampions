@@ -272,17 +272,20 @@ apiRouter.post(
 
 apiRouter.get(
 	"/getGames",
-	passport.authenticate("jwt", { session: false }),
+
 	(req, res) => {
-		Game.find().exec((err, document) => {
-			if (err)
-				res.status(500).json({
-					message: { msgBody: "Error has occured", msgError: true },
-				});
-			else {
-				res.status(200).json({ Games: document, authenticated: true });
-			}
-		});
+		Game.find()
+			.populate("winner.player")
+			.populate("loser.player")
+			.exec((err, document) => {
+				if (err)
+					res.status(500).json({
+						message: { msgBody: "Error has occured", msgError: true },
+					});
+				else {
+					res.status(200).json({ Games: document, authenticated: true });
+				}
+			});
 	}
 );
 
