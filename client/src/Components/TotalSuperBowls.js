@@ -56,20 +56,20 @@ const TotalSuperBowls = (props) => {
 	const arrayOfWinners = countSuperBowlWins(games);
 	sortArrayDescending(arrayOfWinners);
 
-	console.log(arrayOfWinners);
-
 	return (
 		<>
-			<h1>Total Super Bowl Wins</h1>
-			<ul>
-				{arrayOfWinners.map((playerObject) => {
-					return (
-						<li>
-							{playerObject.username} {playerObject.numSuperbowlWins}
-						</li>
-					);
-				})}
-			</ul>
+			<div className="card">
+				<h3 className="text-center card-title">Total Super Bowl Wins</h3>
+				<ul className="list-group list-group-flush">
+					{arrayOfWinners.map((playerObject) => {
+						return (
+							<li className="list-group-item">
+								{playerObject.username} {playerObject.numSuperbowlWins}
+							</li>
+						);
+					})}
+				</ul>
+			</div>
 		</>
 	);
 };

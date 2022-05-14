@@ -41,26 +41,30 @@ const Navbar = (props) => {
 					<li className="nav-item nav-link">Todos</li>
 				</Link> */}
 				{user.role === "admin" ? (
-					<Link to="/admin">
-						<li className="nav-item nav-link">Admin</li>
-					</Link>
+					<li>
+						<Link to="/admin">
+							<li className="nav-item nav-link">Admin</li>
+						</Link>
+					</li>
 				) : null}
-				<button
-					type="button"
-					className="btn btn-link nav-item nav-link"
-					onClick={onClickLogoutHandler}
-				>
-					Logout
-				</button>
+				<li>
+					<button
+						type="button"
+						className="btn btn-link nav-item nav-link"
+						onClick={onClickLogoutHandler}
+					>
+						Logout
+					</button>
+				</li>
 			</>
 		);
 	};
 	return (
-		<nav className="navbar navbar-expand-lg navbar-light bg-light">
+		<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 			<Link to="/">
 				<div className="navbar-brand">BENFL</div>
 			</Link>
-			<div className="collapse navbar-collapse" id="navbarText">
+			<div id="navbarText">
 				<ul className="navbar-nav mr-auto">
 					{!isAuthenticated ? unauthenticatedNavBar() : authenticatedNavBar()}
 				</ul>

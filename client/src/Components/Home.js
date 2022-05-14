@@ -13,11 +13,33 @@ const Home = () => {
 	}, []);
 	return (
 		<>
-			<h1>Hall of Champions Data</h1>
-
-			<p>This is a test</p>
-			{/* 	<AllGames gameArray={games} /> */}
-			<TotalSuperBowls gameArray={games} />
+			<h1 className="text-center">Hall of Champions</h1>
+			<div className="container text-white">
+				<div className="row">
+					{/* 	<AllGames gameArray={games} /> */}
+					<div className="col">
+						<TotalSuperBowls gameArray={games} />
+					</div>
+					<div className="col">
+						<TotalSuperBowls gameArray={games} />
+					</div>
+					<div className="col">
+						<TotalSuperBowls gameArray={games} />
+					</div>
+				</div>
+				<div className="row py-4">
+					{/* 	<AllGames gameArray={games} /> */}
+					<div className="col">
+						<TotalSuperBowls gameArray={games} />
+					</div>
+					<div className="col">
+						<TotalSuperBowls gameArray={games} />
+					</div>
+					<div className="col">
+						<TotalSuperBowls gameArray={games} />
+					</div>
+				</div>
+			</div>
 		</>
 	);
 };
