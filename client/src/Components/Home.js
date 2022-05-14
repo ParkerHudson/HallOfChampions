@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import AllGames from "./AllGames";
 import GameService from "../Services/GameService";
 import TotalSuperBowls from "./TotalSuperBowls";
-import Bracket from "./Bracket";
-import { render } from "express/lib/response";
 
 const Home = () => {
 	const [games, setGames] = useState([]);
@@ -19,12 +17,16 @@ const Home = () => {
 	return (
 		<>
 			<h1 className="text-center">Hall of Champions</h1>
-			{isLoaded && (
-				<div className="container ">
+			{isLoaded ? (
+				<div className="container text-white">
 					<div className="row">
 						{/* 	<AllGames gameArray={games} /> */}
 						<div className="col-sm p-1">
-							<TotalSuperBowls gameArray={games} />
+							{isLoaded ? (
+								<TotalSuperBowls gameArray={games} />
+							) : (
+								<h1>loading...</h1>
+							)}
 						</div>
 						<div className="col-sm p-1">
 							<TotalSuperBowls gameArray={games} />
@@ -46,6 +48,8 @@ const Home = () => {
 						</div>
 					</div>
 				</div>
+			) : (
+				<h1>Loading...</h1>
 			)}
 		</>
 	);
