@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import AllGames from "./AllGames";
 import GameService from "../Services/GameService";
 import TotalSuperBowls from "./TotalSuperBowls";
+import Bracket from "./Bracket";
 
 const Home = () => {
 	const [games, setGames] = useState([]);
@@ -17,25 +18,25 @@ const Home = () => {
 			<div className="container text-white">
 				<div className="row">
 					{/* 	<AllGames gameArray={games} /> */}
-					<div className="col">
+					<div className="col-sm p-1">
 						<TotalSuperBowls gameArray={games} />
 					</div>
-					<div className="col">
+					<div className="col-sm p-1">
 						<TotalSuperBowls gameArray={games} />
 					</div>
-					<div className="col">
+					<div className="col-sm p-1">
 						<TotalSuperBowls gameArray={games} />
 					</div>
 				</div>
-				<div className="row py-4">
+				<div className="row">
 					{/* 	<AllGames gameArray={games} /> */}
-					<div className="col">
+					<div className="col-sm p-1">
 						<TotalSuperBowls gameArray={games} />
 					</div>
-					<div className="col">
+					<div className="col-sm p-1">
 						<TotalSuperBowls gameArray={games} />
 					</div>
-					<div className="col">
+					<div className="col-sm p-1">
 						<TotalSuperBowls gameArray={games} />
 					</div>
 				</div>
