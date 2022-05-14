@@ -1,18 +1,17 @@
 import React from "react";
 
 const Game = (props) => {
-	console.log(props.game);
+	const game = props.game;
 	return (
 		<>
-			<li>Game Year: {props.game.gameYear}</li>
-			<li>Game Type: {props.game.gameType}</li>
-			<li>Winner: {props.game.winner.player.username}</li>
-			<li>Loser: {props.game.loser.player.username}</li>
-
+			<li>Game Year: {game.gameYear}</li>
+			<li>Game Type: {game.gameType}</li>
+			<li>Winner: {game.winner.player.username}</li>
+			<li>Loser: {game.loser.player.username}</li>
 			<li>
-				Score: {props.game.winnerPoints} - {props.game.loserPoints}
+				Score: {game.winnerPoints} - {game.loserPoints}
 			</li>
-			<li></li>
+			<br></br>
 		</>
 	);
 };
