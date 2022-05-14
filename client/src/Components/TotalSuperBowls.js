@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const TotalSuperBowls = (props) => {
 	const games = props.gameArray;
@@ -43,7 +43,6 @@ const TotalSuperBowls = (props) => {
 				completed = false;
 			}
 		}
-
 		return superbowlWinners;
 	};
 
