@@ -19,27 +19,27 @@ const Navbar = (props) => {
 	const unauthenticatedNavBar = () => {
 		return (
 			<>
-				<Link to="/">
+				{/* <Link to="/">
 					<li className="nav-item nav-link">Home</li>
-				</Link>
+				</Link> */}
 				<Link to="/login">
 					<li className="nav-item nav-link">Login</li>
 				</Link>
-				<Link to="/register">
+				{/* <Link to="/register">
 					<li className="nav-item nav-link">Register</li>
-				</Link>
+				</Link> */}
 			</>
 		);
 	};
 	const authenticatedNavBar = () => {
 		return (
 			<>
-				<Link to="/">
+				{/* <Link to="/">
 					<li className="nav-item nav-link">Home</li>
-				</Link>
-				<Link to="/todos">
+				</Link> */}
+				{/* <Link to="/todos">
 					<li className="nav-item nav-link">Todos</li>
-				</Link>
+				</Link> */}
 				{user.role === "admin" ? (
 					<Link to="/admin">
 						<li className="nav-item nav-link">Admin</li>
