@@ -15,7 +15,7 @@ const Home = () => {
 	return (
 		<>
 			<h1 className="text-center">Hall of Champions</h1>
-			<div className="container text-white">
+			<div className="container ">
 				<div className="row">
 					{/* 	<AllGames gameArray={games} /> */}
 					<div className="col-sm p-1">
