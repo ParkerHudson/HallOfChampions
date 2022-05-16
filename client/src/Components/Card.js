@@ -4,6 +4,7 @@ import React from "react";
 //Take in array, map array, return card displaying mapped array
 
 const Card = (props) => {
+	console.log(props.Title + ": " + props.array);
 	return (
 		<div className="card">
 			<h3 className="text-center card-title">{props.Title}</h3>

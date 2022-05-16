@@ -9,13 +9,13 @@ const TotalDivisionTitles = (props) => {
 		var completed = false;
 
 		for (let i = 0; i < games.length; i++) {
-			if (
-				games[i].winner.player.seed == 1 ||
-				games[i].winner.player.seed == 2 ||
-				games[i].winner.player.seed == 3 ||
-				games[i].winner.player.seed == 4
-			) {
-				if (games[i].gameType == "bye" || games[i].gameType == "wildcard") {
+			if (games[i].gameType == "bye" || games[i].gameType == "wildcard") {
+				if (
+					games[i].winner.seed == 1 ||
+					games[i].winner.seed == 2 ||
+					games[i].winner.seed == 3 ||
+					games[i].winner.seed == 4
+				) {
 					for (let j = 0; j < championshipWinners.length; j++) {
 						if (
 							games[i].winner.player.username == championshipWinners[j].username
@@ -25,14 +25,37 @@ const TotalDivisionTitles = (props) => {
 							break;
 						}
 					}
+					if (!completed) {
+						championshipWinners.push({
+							username: games[i].winner.player.username,
+							count: 1,
+						});
+					}
+					completed = false;
 				}
-				if (!completed) {
-					championshipWinners.push({
-						username: games[i].winner.player.username,
-						count: 1,
-					});
+				if (
+					games[i].loser.seed == 1 ||
+					games[i].loser.seed == 2 ||
+					games[i].loser.seed == 3 ||
+					games[i].loser.seed == 4
+				) {
+					for (let k = 0; k < championshipWinners.length; k++) {
+						if (
+							games[i].loser.player.username == championshipWinners[k].username
+						) {
+							championshipWinners[k].count++;
+							completed = true;
+							break;
+						}
+					}
+					if (!completed) {
+						championshipWinners.push({
+							username: games[i].loser.player.username,
+							count: 1,
+						});
+					}
+					completed = false;
 				}
-				completed = false;
 			}
 		}
 		return championshipWinners;
