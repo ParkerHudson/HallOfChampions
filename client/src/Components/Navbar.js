@@ -19,7 +19,7 @@ const Navbar = (props) => {
 	const unauthenticatedNavBar = () => {
 		return (
 			<>
-				<li class="nav-item">
+				<li className="nav-item">
 					<Link to="/login" className="nav-link">
 						Login
 					</Link>
@@ -45,16 +45,16 @@ const Navbar = (props) => {
 					<li className="nav-item nav-link">Todos</li>
 				</Link> */}
 				{user.role === "admin" ? (
-					<li className="nav-item nav-link">
-						<Link to="/admin" style={{ textDecoration: "none" }}>
+					<li className="nav-item">
+						<Link to="/admin" className="nav-link">
 							Admin
 						</Link>
 					</li>
 				) : null}
-				<li>
+				<li classname="nav-item">
 					<button
 						type="button"
-						className="btn btn-link nav-item nav-link"
+						className="btn btn-link nav-link"
 						onClick={onClickLogoutHandler}
 					>
 						Logout
@@ -63,8 +63,8 @@ const Navbar = (props) => {
 			</>
 		);
 	};
-	return (
-		<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+
+	/* <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div className="container-fluid">
 				<Link to="/" style={{ textDecoration: "none" }}>
 					<div className="navbar-brand">BENFL</div>
@@ -82,7 +82,20 @@ const Navbar = (props) => {
 					</ul>
 				</div>
 			</div>
-		</nav>
+		</nav> */
+	return (
+		<>
+			<nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+				<div className="container-fluid">
+					<Link to="/" className="navbar-brand">
+						BENFL
+					</Link>
+					<ul className="navbar-nav">
+						{!isAuthenticated ? unauthenticatedNavBar() : authenticatedNavBar()}
+					</ul>
+				</div>
+			</nav>
+		</>
 	);
 };
 
