@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import AllGames from "./AllGames";
 import GameService from "../Services/GameService";
 import TotalSuperBowls from "./TotalSuperBowls";
+import Card from "./Card";
+import TotalConferenceTitles from "./TotalConferenceTitles";
+import TotalDivisionTitles from "./TotalDivisionTitles";
 
 const Home = () => {
 	const [games, setGames] = useState([]);
@@ -22,30 +25,20 @@ const Home = () => {
 					<div className="row">
 						{/* 	<AllGames gameArray={games} /> */}
 						<div className="col-sm p-1">
-							{isLoaded ? (
-								<TotalSuperBowls gameArray={games} />
-							) : (
-								<h1>loading...</h1>
-							)}
-						</div>
-						<div className="col-sm p-1">
 							<TotalSuperBowls gameArray={games} />
 						</div>
 						<div className="col-sm p-1">
-							<TotalSuperBowls gameArray={games} />
+							<TotalConferenceTitles gameArray={games} />
+						</div>
+						<div className="col-sm p-1">
+							<TotalDivisionTitles gameArray={games} />
 						</div>
 					</div>
 					<div className="row">
 						{/* 	<AllGames gameArray={games} /> */}
-						<div className="col-sm p-1">
-							<TotalSuperBowls gameArray={games} />
-						</div>
-						<div className="col-sm p-1">
-							<TotalSuperBowls gameArray={games} />
-						</div>
-						<div className="col-sm p-1">
-							<TotalSuperBowls gameArray={games} />
-						</div>
+						<div className="col-sm p-1"></div>
+						<div className="col-sm p-1"></div>
+						<div className="col-sm p-1"></div>
 					</div>
 				</div>
 			) : (

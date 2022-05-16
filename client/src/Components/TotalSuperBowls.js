@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import Card from "./Card";
 
 const TotalSuperBowls = (props) => {
 	const games = props.gameArray;
 	/*
+
+	Returns array of super bowl winners sorted by # of wins
+	-------------------------------------------------------
     Create array of players sorted by # of super bowl wins
     Display ordered list with player name and number of wins
 
@@ -16,7 +20,7 @@ const TotalSuperBowls = (props) => {
     if username is not found, create new object with username and set super bowl wins to 1
 
     sort array by # of wins
-    print array to screen
+    return array of winners
 
 
     */
@@ -29,7 +33,7 @@ const TotalSuperBowls = (props) => {
 			if (games[i].gameType == "superbowl") {
 				for (let j = 0; j < superbowlWinners.length; j++) {
 					if (games[i].winner.player.username == superbowlWinners[j].username) {
-						superbowlWinners[j].numSuperbowlWins++;
+						superbowlWinners[j].count++;
 						completed = true;
 						break;
 					}
@@ -37,7 +41,7 @@ const TotalSuperBowls = (props) => {
 				if (!completed) {
 					superbowlWinners.push({
 						username: games[i].winner.player.username,
-						numSuperbowlWins: 1,
+						count: 1,
 					});
 				}
 				completed = false;
@@ -48,29 +52,14 @@ const TotalSuperBowls = (props) => {
 
 	const sortArrayDescending = (array) => {
 		array.sort((a, b) => {
-			return parseFloat(b.numSuperbowlWins) - parseFloat(a.numSuperbowlWins);
+			return parseFloat(b.count) - parseFloat(a.count);
 		});
 	};
 
 	const arrayOfWinners = countSuperBowlWins(games);
 	sortArrayDescending(arrayOfWinners);
 
-	return (
-		<>
-			<div className="card">
-				<h3 className="text-center card-title">Total Super Bowl Wins</h3>
-				<ul className="list-group list-group-flush">
-					{arrayOfWinners.map((playerObject) => {
-						return (
-							<li className="list-group-item">
-								{playerObject.username} {playerObject.numSuperbowlWins}
-							</li>
-						);
-					})}
-				</ul>
-			</div>
-		</>
-	);
+	return <Card array={arrayOfWinners} Title={"Total Super Bowls"} />;
 };
 
 export default TotalSuperBowls;
