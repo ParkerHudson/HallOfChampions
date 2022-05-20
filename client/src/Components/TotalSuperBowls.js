@@ -59,7 +59,7 @@ const TotalSuperBowls = (props) => {
 	const arrayOfWinners = countSuperBowlWins(games);
 	sortArrayDescending(arrayOfWinners);
 
-	return <Card array={arrayOfWinners} Title={"Total Super Bowls"} />;
+	return <Card array={arrayOfWinners} Title={"Total Super Bowl Wins"} />;
 };
 
 export default TotalSuperBowls;

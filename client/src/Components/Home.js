@@ -1,48 +1,54 @@
-import React, { useState, useEffect } from "react";
-import AllGames from "./AllGames";
-import GameService from "../Services/GameService";
+import React, { useContext } from "react";
+import { MainContext } from "../Context/MainContext";
 import TotalSuperBowls from "./TotalSuperBowls";
-import Card from "./Card";
 import TotalConferenceTitles from "./TotalConferenceTitles";
 import TotalDivisionTitles from "./TotalDivisionTitles";
+import Leaderboard from "./Leaderboard";
 
 const Home = () => {
-	const [games, setGames] = useState([]);
-	const [isLoaded, setIsLoaded] = useState(false);
-
-	useEffect(() => {
-		GameService.getGames().then((data) => {
-			setGames(data.Games);
-			setIsLoaded(true);
-		});
-	}, []);
+	const main = useContext(MainContext);
 
 	return (
 		<>
-			<h1 className="text-center">Hall of Champions</h1>
-			{isLoaded ? (
-				<div className="container text-white">
-					<div className="row">
-						{/* 	<AllGames gameArray={games} /> */}
-						<div className="col-sm p-1">
-							<TotalSuperBowls gameArray={games} />
-						</div>
-						<div className="col-sm p-1">
-							<TotalConferenceTitles gameArray={games} />
-						</div>
-						<div className="col-sm p-1">
-							<TotalDivisionTitles gameArray={games} />
-						</div>
-					</div>
-					<div className="row">
-						{/* 	<AllGames gameArray={games} /> */}
-						<div className="col-sm p-1"></div>
-						<div className="col-sm p-1"></div>
-						<div className="col-sm p-1"></div>
-					</div>
-				</div>
+			{main.isLoaded ? (
+				<>
+					{
+						{
+							default: (
+								<>
+									<h1 className="text-center">Hall of Champions</h1>
+									<div className="container text-white">
+										<div className="row">
+											<div className="col-sm p-1">
+												<TotalSuperBowls gameArray={main.games} />
+											</div>
+											<div className="col-sm p-1">
+												<TotalConferenceTitles gameArray={main.games} />
+											</div>
+											<div className="col-sm p-1">
+												<TotalDivisionTitles gameArray={main.games} />
+											</div>
+										</div>
+										<div className="row">
+											<div className="col-sm p-1"></div>
+											<div className="col-sm p-1"></div>
+											<div className="col-sm p-1"></div>
+										</div>
+									</div>
+								</>
+							),
+							leaderboard: (
+								<>
+									<Leaderboard />
+								</>
+							),
+						}[main.display]
+					}
+				</>
 			) : (
-				<h1>Loading...</h1>
+				<>
+					<h1>Loading data from database . . .</h1>
+				</>
 			)}
 		</>
 	);
