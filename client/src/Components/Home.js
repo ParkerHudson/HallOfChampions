@@ -6,6 +6,7 @@ import TotalDivisionTitles from "./TotalDivisionTitles";
 import Leaderboard from "./Leaderboard";
 import M22SuperBowls from "./M22Superbowls";
 import M22ConferenceTitles from "./M22ConferenceTitles";
+import M22DivisionTitles from "./M22DivisionTitles";
 
 const Home = () => {
 	const main = useContext(MainContext);
@@ -38,7 +39,9 @@ const Home = () => {
 											<div className="col-sm p-1">
 												<M22ConferenceTitles gameArray={main.games} />
 											</div>
-											<div className="col-sm p-1"></div>
+											<div className="col-sm p-1">
+												<M22DivisionTitles gameArray={main.games} />
+											</div>
 										</div>
 									</div>
 								</>
