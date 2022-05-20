@@ -220,46 +220,69 @@ apiRouter.post(
 					seed: req.body.winnerSeed,
 				});
 
-				Player.findOne({ username: req.body.loser }, (err, playerObject) => {
-					if (err)
-						res.status(500).json({
-							message: {
-								msgBody: "Error has occured when finding player",
-								msgError: true,
-							},
-						});
-					else {
-						temp = Object.assign(temp, playerObject);
-						var givenLoser = new Contender({
-							player: temp,
-							seed: req.body.loserSeed,
-						});
-
-						const game = new Game({
-							gameYear: req.body.gameYear,
-							gameType: req.body.gameType,
-							winner: givenWinner,
-							loser: givenLoser,
-							winnerPoints: req.body.winnerPoints,
-							loserPoints: req.body.loserPoints,
-						});
-						game
-							.save(game)
-							.then((data) => {
-								res.send(data);
-							})
-							.catch((err) => {
-								res.status(500).json({
-									message: {
-										msgBody: `An error occured while adding game to database. Error: ${err}`,
-									},
-								});
+				if (req.body.loser == "") {
+					const game = new Game({
+						gameYear: req.body.gameYear,
+						gameType: req.body.gameType,
+						winner: givenWinner,
+						loser: null,
+						winnerPoints: req.body.winnerPoints,
+						loserPoints: req.body.loserPoints,
+					});
+					game
+						.save(game)
+						.then((data) => {
+							res.send(data);
+						})
+						.catch((err) => {
+							res.status(500).json({
+								message: {
+									msgBody: `An error occured while adding game to database. Error: ${err}`,
+								},
 							});
-						console.log("Temp: " + temp);
-						console.log("Winner: " + givenWinner);
-						console.log("Loser: " + givenLoser);
-					}
-				});
+						});
+				} else {
+					Player.findOne({ username: req.body.loser }, (err, playerObject) => {
+						if (err)
+							res.status(500).json({
+								message: {
+									msgBody: "Error has occured when finding player",
+									msgError: true,
+								},
+							});
+						else {
+							temp = Object.assign(temp, playerObject);
+							var givenLoser = new Contender({
+								player: temp,
+								seed: req.body.loserSeed,
+							});
+
+							const game = new Game({
+								gameYear: req.body.gameYear,
+								gameType: req.body.gameType,
+								winner: givenWinner,
+								loser: givenLoser,
+								winnerPoints: req.body.winnerPoints,
+								loserPoints: req.body.loserPoints,
+							});
+							game
+								.save(game)
+								.then((data) => {
+									res.send(data);
+								})
+								.catch((err) => {
+									res.status(500).json({
+										message: {
+											msgBody: `An error occured while adding game to database. Error: ${err}`,
+										},
+									});
+								});
+							console.log("Temp: " + temp);
+							console.log("Winner: " + givenWinner);
+							console.log("Loser: " + givenLoser);
+						}
+					});
+				}
 			}
 		});
 	}
