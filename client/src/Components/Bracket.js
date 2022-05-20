@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/bracket.css";
 
-const Bracket = () => {
+const Bracket = (props) => {
 	return (
 		<>
 			<h1>2013 NCAA Tournament - Midwest Bracket</h1>
