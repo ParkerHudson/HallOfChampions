@@ -61,7 +61,7 @@ const TotalConferenceTitles = (props) => {
 	const arrayOfWinners = countChampionships(games);
 	sortArrayDescending(arrayOfWinners);
 
-	return <Card array={arrayOfWinners} Title={"Total Championship Wins"} />;
+	return <Card array={arrayOfWinners} Title={"Total Conference Titles"} />;
 };
 
 export default TotalConferenceTitles;

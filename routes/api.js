@@ -222,6 +222,7 @@ apiRouter.post(
 
 				if (req.body.loser == "") {
 					const game = new Game({
+						maddenYear: req.body.maddenYear,
 						gameYear: req.body.gameYear,
 						gameType: req.body.gameType,
 						winner: givenWinner,
@@ -258,6 +259,7 @@ apiRouter.post(
 							});
 
 							const game = new Game({
+								maddenYear: req.body.maddenYear,
 								gameYear: req.body.gameYear,
 								gameType: req.body.gameType,
 								winner: givenWinner,

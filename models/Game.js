@@ -3,6 +3,10 @@ const Contender = require("./Contender").schema;
 
 const GameSchema = new mongoose.Schema(
 	{
+		maddenYear: {
+			type: Number,
+			required: true,
+		},
 		gameYear: {
 			type: Number,
 			required: true,
