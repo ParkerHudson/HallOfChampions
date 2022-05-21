@@ -35,8 +35,8 @@ const Card = (props) => {
 					);
 				})}
 			</ul>
-			<div className="card-body">
-				<Link to="/leaderboard" className="card-link">
+			<div className="card-body card-link">
+				<Link to="/leaderboard" className="text-success">
 					View All
 				</Link>
 			</div>
